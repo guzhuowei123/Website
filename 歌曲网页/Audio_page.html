@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐致敬 - 娜娜</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f0f0f0;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        #player-container {
+            position: fixed;
+            top: 20%; /* 距离顶部50% */
+            left: 50%; /* 距离左边50% */
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+        }
+
+        #tribute-message {
+            position: fixed;
+            top: calc(50% + 50px); /* 基于播放器的底部稍微向下调整位置 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #FF69B4;
+            text-align: center;
+            visibility: hidden; /* 初始化时隐藏 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="player-container">
+    <audio id="audio-player" controls>
+        <source src="h3r3_memory.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<div id="tribute-message"></div>
+
+<script>
+    // 获取audio元素
+    const audioPlayer = document.getElementById('audio-player');
+
+    // Java代码字符串，已格式化
+    const javaCode = `public class InfiniteLove {
+    public static void main(String[] args) {
+        int num_love = 0;
+        while(true) {
+            System.out.println("当前的Love值:" + num_love);
+            num_love++;
+        }
+    }
+}`;
+
+    // 创建<pre>元素，用于包含代码
+    const preElement = document.createElement('pre');
+    preElement.style.color = 'white'; // 文字颜色
+    preElement.style.fontFamily = 'monospace';
+    preElement.style.fontSize = '15px';
+    preElement.style.lineHeight = '1.6';
+    preElement.style.width = '80%'; // 控制宽度
+    preElement.style.overflow = 'auto';
+    preElement.style.wordWrap = 'break-word';
+    preElement.style.position = 'fixed'; // 使用fixed定位
+    preElement.style.top = '50%'; // 垂直居中
+    preElement.style.left = '80%'; // 水平居中
+    preElement.style.transform = 'translate(-50%, -50%)'; // 完全居中
+    preElement.style.textAlign = 'left'; // 文本左对齐以保持代码格式
+
+    // 打字机效果函数，保持格式
+    function typeWriter(text, element, n) {
+        if (n < (text.length)) {
+            // 逐个字符添加，包括空格和换行符
+            element.textContent += text.charAt(n);
+            n++;
+            setTimeout(function() {
+                typeWriter(text, element, n);
+            }, 50); // 调整打字速度
+        }
+    }
+
+    // 监听audio播放结束的事件
+    audioPlayer.addEventListener('ended', function() {
+        // 将<pre>元素添加到页面的指定位置
+        document.body.appendChild(preElement);
+        // 开始打字机效果显示文本
+        typeWriter(javaCode, preElement, 0);
+    });
+</script>
+
+
+</body>
+</html>
+
